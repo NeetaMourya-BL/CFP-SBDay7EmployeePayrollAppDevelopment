@@ -1,6 +1,4 @@
 package com.bridgelabz.employeepayrollappdevelopment.service;
-
-
 import com.bridgelabz.employeepayrollappdevelopment.dto.EmployeePayrollDTO;
 import com.bridgelabz.employeepayrollappdevelopment.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayrollappdevelopment.model.EmployeePayrollData;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
 @Service
 @Slf4j
 public class EmployeePayrollService implements IEmployeePayrollService {
@@ -51,4 +48,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         employeePayrollRepository.delete(empData);
     }
 
+    @Override
+    public List<EmployeePayrollData> getEmployeesPayrollDataByDepartment(String department) {
+        return employeePayrollRepository.findEmployeesByDepartment(department);
+    }
 }
