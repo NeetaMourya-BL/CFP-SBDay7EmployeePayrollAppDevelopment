@@ -4,10 +4,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
+
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.util.List;
 
+@ToString
 public class EmployeePayrollDTO {
 
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee name Invalid")
@@ -22,7 +25,7 @@ public class EmployeePayrollDTO {
 
     @JsonFormat(pattern = "dd MMM yyyy")
     @NotNull(message = "Startdate should not be empty")
-    @PastOrPresent(message = "startDate should be past or todays date")
+    @PastOrPresent(message = "startDate shuld be past or todays date")
     public LocalDate startDate;
 
     @NotBlank(message = "Note can not be empty")
