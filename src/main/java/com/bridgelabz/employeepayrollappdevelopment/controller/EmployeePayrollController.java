@@ -25,13 +25,6 @@ public class EmployeePayrollController {
 
     @Autowired
     private TokenUtil tokenUtil;
-//    @RequestMapping(value = { "", "/", "get" })
-//    public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
-//        List<EmployeePayrollData> empDataList = null;
-//        empDataList = employeePayrollService.getEmployeePayrollData();
-//        ResponseDTO respDTO = new ResponseDTO("Get Call Success", empDataList);
-//        return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
-//    }
     @GetMapping("/get/all")
     public List<EmployeePayrollData> getEmployeePayrollData() {
         List<EmployeePayrollData> employeesDataList = employeePayrollService.getEmployeePayrollData();
@@ -57,9 +50,8 @@ public class EmployeePayrollController {
             @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
         log.debug("Employee DTO" + employeePayrollDTO.toString());
         EmployeePayrollData payrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
-        System.out.println(payrollData);
-
-        ResponseDTO respDTO = new ResponseDTO("Created Employee payroll data for:",tokenUtil.createToken(payrollData.getEmployeeId()));
+        String token = tokenUtil.createToken(payrollData.getEmployeeId());
+        ResponseDTO respDTO = new ResponseDTO("Created Employee payroll data for:",token);
         return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
     }
 

@@ -2,9 +2,10 @@ package com.bridgelabz.employeepayrollappdevelopment.model;
 
 import com.bridgelabz.employeepayrollappdevelopment.dto.EmployeePayrollDTO;
 import lombok.Data;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "employeepayroll_db")
@@ -38,7 +39,6 @@ public @Data class EmployeePayrollData {
     public EmployeePayrollData() {
 
     }
-
     public void updateEmployeePayollData(EmployeePayrollDTO employeePayrollDTO) {
         this.name = employeePayrollDTO.name;
         this.salary = employeePayrollDTO.salary;
