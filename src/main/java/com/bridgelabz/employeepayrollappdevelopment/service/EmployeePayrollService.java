@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -35,7 +34,6 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         return employeePayrollRepository.findById(tokenUtil.decodeToken(token))
                 .orElseThrow(() -> new EmployeePayrollException("Employee With employeeId: " + tokenUtil.decodeToken(token) + " does not exists"));
     }
-
     @Override
     public EmployeePayrollData createEmployeePayrollData(@RequestBody EmployeePayrollDTO empPayrollDTO) {
         EmployeePayrollData empData = new EmployeePayrollData(empPayrollDTO);
@@ -56,8 +54,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     }
 
     @Override
-    public List<EmployeePayrollData> getEmployeesPayrollDataByDepartment(String department) {
-        return employeePayrollRepository.findEmployeesByDepartment(department);
+    public List<EmployeePayrollData> getEmployeesPayrollDataByDepartment(String departments) {
+        return employeePayrollRepository.findEmployeesByDepartment(departments);
     }
 
     @Override
@@ -67,34 +65,6 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
     @Override
     public String deleteallEmployeePayrollData() {
-        employeePayrollRepository.deleteAll();
-        return "All Data Delete";
-    }
-
-    @Override
-    public List<EmployeePayrollData> getAllEmployeePayrollData(String token) {
-
-        Optional<EmployeePayrollData> empData = employeePayrollRepository.findById(tokenUtil.decodeToken(token));
-        if (empData.isPresent()) {
-            List<EmployeePayrollData> employeePayrollDataList = employeePayrollRepository.findAll();
-            return employeePayrollDataList;
-        }
-        return null;
-    }
-
-    @Override
-    public Optional<EmployeePayrollData> getupdateEmployeePayrollData(String token) {
-
-        Optional<EmployeePayrollData> empData = employeePayrollRepository.findById(tokenUtil.decodeToken(token));
-        if (empData.isPresent()) {
-            Optional<EmployeePayrollData> employeePayrollUpdateData = employeePayrollRepository.findById(tokenUtil.decodeToken(token));
-            return employeePayrollUpdateData;
-        }
-        return null;
-    }
-
-    @Override
-    public String deleteAllEmployeePayrollData() {
         employeePayrollRepository.deleteAll();
         return "All Data Delete";
     }

@@ -13,7 +13,7 @@ public @Data class EmployeePayrollData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employee_id")
-    private int employeeId;
+    private long employeeId;
     @Column(name = "name")
     private String name;
 

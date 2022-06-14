@@ -13,7 +13,8 @@ import com.auth0.jwt.interfaces.Verification;
 @Component
 public class TokenUtil {
     private static final String TOKEN_SECRET = "Neeta";
-    public  String createToken(int id)   {
+
+    public String createToken(long id) {
         try {
             //to set algorithm
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
@@ -37,26 +38,23 @@ public class TokenUtil {
      * @param token
      * @return
      */
-    public long decodeToken(String token)
-    {
-        int userid;
+    public long decodeToken(String token) {
+        long userid;
         //for verification algorithm
         Verification verification = null;
         try {
             verification = JWT.require(Algorithm.HMAC256(TOKEN_SECRET));
-        } catch (IllegalArgumentException  e) {
+        } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        JWTVerifier jwtverifier=verification.build();
+        JWTVerifier jwtverifier = verification.build();
         //to decode token
-        DecodedJWT decodedjwt=jwtverifier.verify(token);
+        DecodedJWT decodedjwt = jwtverifier.verify(token);
 
-        Claim claim=decodedjwt.getClaim("user_id");
-        userid=claim.asInt();
+        Claim claim = decodedjwt.getClaim("user_id");
+        userid = claim.asInt();
         return userid;
 
     }
-
-
 }
